@@ -30,7 +30,7 @@
                         <select class="form-select" name="type_id" id="type">
                             <option @selected(old('type_id') == null) value="">Nessuna categoria</option>
                             @foreach ($types as $type)
-                                <option @selected(old('type_id') == $type_id->id) value="{{ $type->id }}">{{ $type->nome }}</option>
+                                <option @selected(old('type_id') == $type->id) value="{{ $type->id }}">{{ $type->nome }}</option>
                             @endforeach
                         </select>
                     </div>
