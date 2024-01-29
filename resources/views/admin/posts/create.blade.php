@@ -26,6 +26,15 @@
                             value="{{ old('titolo') }}">
                     </div>
                     <div class="mb-3">
+                        <label for="type">Seleziona la categoria</label>
+                        <select class="form-select" name="type_id" id="type">
+                            <option @selected(old('type_id') == null) value="">Nessuna categoria</option>
+                            @foreach ($types as $type)
+                                <option @selected(old('type_id') == $type_id->id) value="{{ $type->id }}">{{ $type->nome }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="contenuto" class="form-label">Contenuto</label>
                         <textarea class="form-control" id="contenuto" rows="3" name="contenuto">{{ old('contenuto') }}</textarea>
                     </div>

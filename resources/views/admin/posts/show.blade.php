@@ -16,6 +16,9 @@
         @endif
         <h5 class="card-title fs-4 fw-bold mt-2 mb-2">{{ $post->titolo }}</h5>
         <h6 class="card-subtitle mb-4 text-muted">({{ $post->slug }})</h6>
+        <p>
+          Categoria: {{ $post->type ? $post->type->nome : 'non assegnata' }}
+        </p>
         <p class="card-text fw-bold mb-0">
           Contenuto:
         </p>

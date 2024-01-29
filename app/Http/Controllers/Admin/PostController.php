@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Type;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $types = Type::all(); 
+        return view('admin.posts.create', compact('types'));
     }
 
     /**
@@ -44,6 +46,7 @@ class PostController extends Controller
         $form_data = $request->validated();
         $post = new Post();
         $post->titolo = $form_data['titolo'];
+        $post->type_id = $form_data['type_id'];
         $post->contenuto = $form_data['contenuto'];
         $post->slug = Str::slug($form_data['titolo']);
         if($request->hasFile('cover_image')) {
@@ -76,7 +79,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        $types = Type::all();
+        return view('admin.posts.edit', compact('post', 'types'));
     }
 
     /**
@@ -91,6 +95,7 @@ class PostController extends Controller
         $form_data = $request->validated();
         $post_to_update = Post::findOrFail($id);
         $post_to_update->titolo = $form_data['titolo'];
+        $post_to_update->type_id = $form_data['type_id'];
         $post_to_update->contenuto = $form_data['contenuto'];
         $post_to_update->slug = Str::slug($form_data['titolo']);
         if($request->hasFile('cover_image')) {
